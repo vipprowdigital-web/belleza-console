@@ -220,46 +220,46 @@ export default function ContactPage() {
         new Date(row.original.createdAt).toLocaleString("en-IN"),
     },
 
-    // {
-    //   id: "actions",
-    //   header: "Actions",
-    //   cell: ({ row, table }) => {
-    //     const item = row.original;
-    //     return (
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger asChild>
-    //           <Button variant="ghost" className="h-8 w-8 p-0">
-    //             <MoreHorizontal className="h-4 w-4" />
-    //           </Button>
-    //         </DropdownMenuTrigger>
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row, table }) => {
+        const item = row.original;
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
 
-    //         <DropdownMenuContent align="end">
-    //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-    //           <DropdownMenuSeparator />
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
 
-    //           <DropdownMenuItem
-    //             onClick={() => navigate(`/admin/contact/edit/${item._id}`)}
-    //           >
-    //             <FileText className="mr-2 h-4 w-4" /> View Details
-    //           </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate(`/admin/contact/edit/${item._id}`)}
+              >
+                <FileText className="mr-2 h-4 w-4" /> View Details
+              </DropdownMenuItem>
 
-    //           <DropdownMenuItem onClick={() => handleSendResponse(item)}>
-    //             <Reply className="mr-2 h-4 w-4" /> Respond
-    //           </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSendResponse(item)}>
+                <Reply className="mr-2 h-4 w-4" /> Respond
+              </DropdownMenuItem>
 
-    //           <DropdownMenuItem
-    //             onClick={() =>
-    //               (table.options.meta as any)?.openDeleteDialog(item)
-    //             }
-    //             className="text-red-600"
-    //           >
-    //             <Trash2 className="mr-2 h-4 w-4" /> Delete
-    //           </DropdownMenuItem>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-    //     );
-    //   },
-    // },
+              <DropdownMenuItem
+                onClick={() =>
+                  (table.options.meta as any)?.openDeleteDialog(item)
+                }
+                className="text-red-900"
+              >
+                <Trash2 className="mr-2 h-4 w-4" /> Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
   ];
 
   return (

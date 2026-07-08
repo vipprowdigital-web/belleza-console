@@ -187,7 +187,7 @@ export default function ContactForm({
               className={cn(
                 "capitalize px-3 py-1 text-white",
                 {
-                  new: "bg-blue-500",
+                  new: "bg-red-900",
                   in_progress: "bg-amber-500",
                   answered: "bg-green-600",
                   closed: "bg-gray-500",

@@ -118,18 +118,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
 
     mediaLibraryNav: [
-      {
-        title: "Certificate",
-        url: "/admin/certificate",
-        icon: Table2,
-        isActive: isActive("/admin/certificate"),
-      },
-      {
-        title: "Users Certificate",
-        url: "/admin/user-certificate",
-        icon: FileBadge,
-        isActive: isActive("/admin/user-certificate"),
-      },
+      // {
+      //   title: "Certificate",
+      //   url: "/admin/certificate",
+      //   icon: Table2,
+      //   isActive: isActive("/admin/certificate"),
+      // },
+      // {
+      //   title: "Users Certificate",
+      //   url: "/admin/user-certificate",
+      //   icon: FileBadge,
+      //   isActive: isActive("/admin/user-certificate"),
+      // },
       {
         title: "Gallery",
         url: "/admin/gallery",
@@ -255,7 +255,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           groupName="Customer Feedback"
         />
 
-        {/* <NavMain items={data.mediaLibraryNav} groupName="Media Library" /> */}
+        <NavMain items={data.mediaLibraryNav} groupName="Media Library" />
 
         <NavMain
           items={data.communicationCenterNav}
