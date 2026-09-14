@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function SignupPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate("/sign-in", { replace: true });
-  }, [navigate]);
+  // useEffect(() => {
+  //   navigate("/sign-in", { replace: true });
+  // }, [navigate]);
 
   return <SignupForm />;
 }

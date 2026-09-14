@@ -24,6 +24,9 @@ export function SignupForm({
     email: "",
     password: "",
     confirmPassword: "",
+    branchName: "",
+    subdomain: "",
+    customDomain: "",
   });
 
   const [message, setMessage] = useState<{
@@ -43,10 +46,10 @@ export function SignupForm({
     e.preventDefault();
     setMessage(null);
 
-    const { name, email, password, confirmPassword } = formData;
+    const { name, email, password, confirmPassword, branchName, subdomain, customDomain } = formData;
 
-    if (!name || !email || !password || !confirmPassword)
-      return setMessage({ type: "error", text: "All fields are required." });
+    if (!name || !email || !password || !confirmPassword || !branchName || !subdomain)
+      return setMessage({ type: "error", text: "All required fields must be filled." });
 
     if (password !== confirmPassword)
       return setMessage({ type: "error", text: "Passwords do not match." });
@@ -57,8 +60,15 @@ export function SignupForm({
         text: "Password must be at least 8 characters long.",
       });
 
+    // Validate subdomain format (alphanumeric and hyphens only)
+    if (!/^[a-zA-Z0-9-]+$/.test(subdomain))
+      return setMessage({
+        type: "error",
+        text: "Subdomain can only contain alphanumeric characters and hyphens.",
+      });
+
     register(
-      { name, email, password },
+      { name, email, password, branchName, subdomain, customDomain: customDomain || undefined },
       {
         onSuccess: () => {
           setMessage({
@@ -70,6 +80,9 @@ export function SignupForm({
             email: "",
             password: "",
             confirmPassword: "",
+            branchName: "",
+            subdomain: "",
+            customDomain: "",
           });
           setTimeout(() => navigate("/sign-in"), 1500);
         },
@@ -87,7 +100,7 @@ export function SignupForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8" onSubmit={handleSubmit}>
+          <form className="px-4 py-6 sm:p-6 md:px-8" onSubmit={handleSubmit}>
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Create your account</h1>
@@ -108,31 +121,74 @@ export function SignupForm({
                 </div>
               )}
 
-              <Field>
-                <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Full Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-                {/* <FieldDescription>Input Description</FieldDescription> */}
-              </Field>
+                <div className="grid sm:grid-cols-2 gap-2">
+                  <Field>
+                    <FieldLabel htmlFor="name">Full Name</FieldLabel>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Full Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      />
+                    {/* <FieldDescription>Input Description</FieldDescription> */}
+                  </Field>
 
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="email@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                {/* <FieldDescription>Input Description</FieldDescription> */}
-              </Field>
+                  <Field>
+                    <FieldLabel htmlFor="email">Email</FieldLabel>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="email@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      />
+                    {/* <FieldDescription>Input Description</FieldDescription> */}
+                  </Field>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-2">
+                  <Field>
+                    <FieldLabel htmlFor="branchName">Branch Name</FieldLabel>
+                    <Input
+                      id="branchName"
+                      type="text"
+                      placeholder="Your Branch Name"
+                      value={formData.branchName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </Field>
+                  <Field>
+                    <FieldLabel htmlFor="customDomain">Custom Domain (Optional)</FieldLabel>
+                    <Input
+                      id="customDomain"
+                      type="text"
+                      placeholder="yourdomain.com"
+                      value={formData.customDomain}
+                      onChange={handleChange}
+                    />
+                  </Field>
+                  
+               </div>
+               <Field>
+                    <FieldLabel htmlFor="subdomain">Subdomain</FieldLabel>
+                    <Input
+                      id="subdomain"
+                      type="text"
+                      placeholder="your-subdomain"
+                      value={formData.subdomain}
+                      onChange={handleChange}
+                      required
+                    />
+                    <FieldDescription>
+                      Alphanumeric and hyphens only (e.g., my-branch)
+                    </FieldDescription>
+                  </Field>
+
+          
 
               <Field>
                 <Field className="grid grid-cols-2 gap-4">
