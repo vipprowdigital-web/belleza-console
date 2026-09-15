@@ -190,7 +190,7 @@ import { EditProfileForm } from "~/components/edit-profile-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default function ProfilePage() {
-  const { user, isLoading } = useUser();
+  const { user, branch, isLoading } = useUser();
 
   if (isLoading) {
     return (
@@ -221,7 +221,7 @@ export default function ProfilePage() {
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div>
             <h3 className="font-semibold text-sm text-muted-foreground mb-2">Full Name</h3>
-            <p className="text-lg font-medium">{user.name}</p>
+            <p className="text-sm! font-medium">{user.name}</p>
           </div>
           <div>
             <h3 className="font-semibold text-sm text-muted-foreground mb-2">Email</h3>
@@ -229,16 +229,16 @@ export default function ProfilePage() {
           </div>
           <div>
             <h3 className="font-semibold text-sm text-muted-foreground mb-2">Branch Name</h3>
-            <p className="text-lg font-medium">{user.branchName}</p>
+            <p className="text-lg font-medium">{branch?.name}</p>
           </div>
           <div>
             <h3 className="font-semibold text-sm text-muted-foreground mb-2">Subdomain</h3>
-            <p className="text-lg font-medium text-blue-600">{user.subdomain}</p>
+            <p className="text-lg font-medium text-blue-600">{branch?.subdomain}</p>
           </div>
-          {user.customDomain && (
+          {branch?.customDomain && (
             <div>
               <h3 className="font-semibold text-sm text-muted-foreground mb-2">Custom Domain</h3>
-              <p className="text-lg font-medium text-blue-600">{user.customDomain}</p>
+              <p className="text-lg font-medium text-blue-600">{branch?.customDomain}</p>
             </div>
           )}
           <div>

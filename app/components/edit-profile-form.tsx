@@ -4,19 +4,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import {
   Field,
   FieldDescription,
-  FieldGroup,
   FieldLabel,
 } from "~/components/ui/field";
 import { Input } from "~/components/ui/input";
 import { useUser } from "~/hooks/useUser";
-import { UserProfile } from "~/api/auth.api";
 
 interface EditProfileFormProps {
   onSuccess?: () => void;
 }
 
 export function EditProfileForm({ onSuccess }: EditProfileFormProps) {
-  const { user, isLoading, isUpdating, updateUser, updateError } = useUser();
+  const { user, branch, isLoading, isUpdating, updateUser } = useUser();
   const [formData, setFormData] = useState({
     name: "",
     branchName: "",
@@ -31,17 +29,17 @@ export function EditProfileForm({ onSuccess }: EditProfileFormProps) {
 
   const [isEditing, setIsEditing] = useState(false);
 
-  // Initialize form with user data
+  // Initialize form with user and branch data
   useEffect(() => {
-    if (user) {
+    if (user && branch) {
       setFormData({
         name: user.name || "",
-        branchName: user.branchName || "",
-        subdomain: user.subdomain || "",
-        customDomain: user.customDomain || "",
+        branchName: branch.name || "",
+        subdomain: branch.subdomain || "",
+        customDomain: branch.customDomain || "",
       });
     }
-  }, [user]);
+  }, [user, branch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -94,12 +92,12 @@ export function EditProfileForm({ onSuccess }: EditProfileFormProps) {
   const handleCancel = () => {
     setIsEditing(false);
     setMessage(null);
-    if (user) {
+    if (user && branch) {
       setFormData({
         name: user.name,
-        branchName: user.branchName,
-        subdomain: user.subdomain,
-        customDomain: user.customDomain || "",
+        branchName: branch.name,
+        subdomain: branch.subdomain,
+        customDomain: branch.customDomain || "",
       });
     }
   };
@@ -154,7 +152,7 @@ export function EditProfileForm({ onSuccess }: EditProfileFormProps) {
             <Input
               id="email"
               type="email"
-              placeholder="your@email.com"
+              placeholder="your@gmail.com"
               value={user?.email || ""}
               disabled
             />

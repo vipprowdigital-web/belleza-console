@@ -3,7 +3,7 @@ import { EditProfileForm } from "~/components/edit-profile-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default function ProfilePage() {
-  const { user, isLoading } = useUser();
+  const { user, branch, isLoading } = useUser();
 
   if (isLoading) {
     return (
@@ -34,38 +34,56 @@ export default function ProfilePage() {
         <CardContent className="grid gap-6 md:grid-cols-2">
           <div>
             <h3 className="font-semibold text-sm text-muted-foreground mb-2">Full Name</h3>
-            <p className="text-lg font-medium">{user.name}</p>
+            <p className="text-md font-medium">{user.name}</p>
           </div>
           <div>
             <h3 className="font-semibold text-sm text-muted-foreground mb-2">Email</h3>
-            <p className="text-lg font-medium">{user.email}</p>
+            <p className="text-md font-medium">{user.email}</p>
           </div>
           <div>
-            <h3 className="font-semibold text-sm text-muted-foreground mb-2">Branch Name</h3>
-            <p className="text-lg font-medium">{user.branchName}</p>
+            <h3 className="font-semibold text-sm text-muted-foreground mb-2">Provider</h3>
+            <p className="text-md font-medium capitalize">{user.provider}</p>
           </div>
-          <div>
-            <h3 className="font-semibold text-sm text-muted-foreground mb-2">Subdomain</h3>
-            <p className="text-lg font-medium text-blue-600">{user.subdomain}</p>
-          </div>
-          {user.customDomain && (
+          {user.avatar && (
             <div>
-              <h3 className="font-semibold text-sm text-muted-foreground mb-2">Custom Domain</h3>
-              <p className="text-lg font-medium text-blue-600">{user.customDomain}</p>
+              <h3 className="font-semibold text-sm text-muted-foreground mb-2">Avatar</h3>
+              <img src={user.avatar} alt={user.name} className="w-12 h-12 rounded-full" />
             </div>
           )}
-          <div>
-            <h3 className="font-semibold text-sm text-muted-foreground mb-2">Account Created</h3>
-            <p className="text-lg font-medium">
-              {new Date(user.createdAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-          </div>
         </CardContent>
       </Card>
+
+      {/* Branch Information Card */}
+      {branch && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Branch Information</CardTitle>
+            <CardDescription>
+              Your branch and domain details
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 className="font-semibold text-sm text-muted-foreground mb-2">Branch Name</h3>
+              <p className="text-md font-medium">{branch.name}</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm text-muted-foreground mb-2">Slug</h3>
+              <p className="text-md font-medium">{branch.slug}</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm text-muted-foreground mb-2">Subdomain</h3>
+              <p className="text-md font-medium">{branch.subdomain}</p>
+            </div>
+            {branch.customDomain && (
+              <div>
+                <h3 className="font-semibold text-sm text-muted-foreground mb-2">Custom Domain</h3>
+                <p className="text-md font-medium">{branch.customDomain}</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       {/* Edit Profile Card */}
       <EditProfileForm />

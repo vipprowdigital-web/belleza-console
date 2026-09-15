@@ -1,8 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getUserProfile, updateUserProfile } from "~/api/auth.api";
+import { useSelector } from "react-redux";
+import type { RootState } from "~/redux/store";
 
 export function useUser() {
     const queryClient = useQueryClient();
+    const reduxUser = useSelector((state: RootState) => state.user);
 
     // Fetch user profile
     const userQuery = useQuery({
@@ -21,12 +24,19 @@ export function useUser() {
             console.info("Profile updated successfully.", data);
         },
         onError: (error: any) => {
-            console.error("Profile update failed.", error.message);
+            console.error("Profile update failed:", error.message);
         },
     });
 
+    // Extract user and branch from response
+    const profileData = userQuery.data;
+    const user = profileData?.user;
+    const branch = profileData?.branch;
+
     return {
-        user: userQuery.data,
+        user,
+        branch,
+        reduxUser, // Also return redux user for fallback
         isLoading: userQuery.isLoading,
         isFetching: userQuery.isFetching,
         error: userQuery.error,

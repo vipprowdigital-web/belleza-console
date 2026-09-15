@@ -28,21 +28,21 @@ export default [
       ...createCrudRoutes("certificate"),
       ...createCrudRoutes("user-certificate"),
       ...createCrudRoutes("gallery"),
-       ...createCrudRoutes("support"),
+      ...createCrudRoutes("support"),
       ...createCrudRoutes("contact"),
       ...createCrudRoutes("domains"),
 
       // Single Routes -> Model / Pop Form / Chat Box / AI Agents / Etc.
 
-       route("feedback", "features/feedback/index.tsx"),
+      route("feedback", "features/feedback/index.tsx"),
 
+      route("users/profile", "routes/protected/user-wrapper.tsx"),
 
-      // Add other custom routes freelya
+      // Add other custom routes freely
       //   route("reports", "features/reports/index.tsx"),
       //   route("reports/sales", "features/reports/sales-wrapper.tsx"),
     ]),
 
-    route("users/profile", "routes/protected/user-wrapper.tsx"),
   ]),
 ] satisfies RouteConfig;
 
