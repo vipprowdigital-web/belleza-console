@@ -177,9 +177,9 @@ export default function ContactPage() {
     },
 
     {
-      accessorKey: "courseName",
+      accessorKey: "course",
       header: "Course Name",
-      cell: ({ row }) => row.original.courseName || "-",
+      cell: ({ row }) => row.original.course?.title || "-",
     },
 
     {
