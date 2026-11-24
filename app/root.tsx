@@ -11,7 +11,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 
-// 👇 import your ThemeProvider
+// import your ThemeProvider
 import { ThemeProvider } from "~/components/theme-provider";
 import { SidebarProvider } from "~/components/ui/sidebar";
 import { QueryProvider } from "./providers/QueryProvider";
@@ -21,6 +21,7 @@ import { Toaster } from "~/components/ui/sonner";
 // import { ModeToggle } from "~/components/mode-toggle";
 
 export const links: Route.LinksFunction = () => [
+  { rel: "icon", type: "image/svg+xml", href: "/icon.svg" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",

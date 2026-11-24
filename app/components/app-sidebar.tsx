@@ -261,10 +261,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           items={data.communicationCenterNav}
           groupName="Communication Center"
         />
-        {/* <NavMain
+        <NavMain
           items={data.legalComplianceNav}
           groupName="Legal & Compliance"
-        /> */}
+        />
         {/* <NavMain
           items={data.careerManagementNav}
           groupName="Career Management"
